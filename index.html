@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Holcomb School Pre-K thru 12 Menu</title>
+    <script src="index.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <main>
+      <div class="content-wrapper">
+        <div class="month-day-selector">
+          <div class="md-grouping">
+            <label for="month">Month:</label>
+            <select id="month">
+              <option value="0">January</option>
+              <option value="1">Febuary</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+          </div>
+
+          <div class="md-grouping">
+            <label for="year">Year:</label>
+            <input id="year" type="tel" maxlength="4" value="2023" />
+          </div>
+        </div>
+
+        <div class="calendar">
+          <div class="headers">
+            <p class="calendar-month-label">March 2023</p>
+            <p class="school-name">Holcomb Lunch Menu</p>
+          </div>
+
+          <div class="calendar-days">
+            <p class="day-header">Tuesday</p>
+            <p class="day-header">Wednesday</p>
+            <p class="day-header">Thursday</p>
+            <p class="day-header">Friday</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

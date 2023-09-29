@@ -1,0 +1,104 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  font-family: "Oswald", sans-serif;
+}
+
+div.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 800px;
+  padding-top: 10px;
+}
+
+div.month-day-selector {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+div.month-day-selector div.md-grouping {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+}
+div.month-day-selector div.md-grouping label {
+  font-size: 32px;
+}
+div.month-day-selector div.md-grouping select,
+div.month-day-selector div.md-grouping input {
+  font-size: 24px;
+}
+
+div.calendar {
+  padding: 20px;
+  border: 1px solid red;
+}
+div.calendar div.headers {
+  display: flex;
+  justify-content: space-between;
+}
+div.calendar div.headers p {
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+}
+div.calendar div.headers p.calendar-month-label {
+  font-size: 58px;
+}
+div.calendar div.headers p.school-name {
+  font-size: 48px;
+}
+div.calendar div.calendar-days {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+div.calendar div.calendar-days p.day-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  background-color: orangered;
+  color: white;
+  border-radius: 5px 50px 5px 50px;
+}
+div.calendar div.calendar-days div.calendar-day {
+  border: 2px solid orange;
+  border-radius: 10px;
+  height: 100px;
+  position: relative;
+  padding: 2px;
+  display: flex;
+}
+div.calendar div.calendar-days div.calendar-day p.day-number {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background-color: green;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+div.calendar div.calendar-days div.calendar-day div.day-content {
+  border: none;
+  border-radius: inherit;
+  width: 100%;
+  word-break: break-all;
+  text-align: center;
+}
+div.calendar div.calendar-days div.calendar-day div.day-content p {
+  height: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */
