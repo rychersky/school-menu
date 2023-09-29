@@ -1,0 +1,115 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  font-family: "Oswald", sans-serif;
+}
+
+div.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 800px;
+  padding-top: 10px;
+}
+
+div.month-day-selector {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  div.md-grouping {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+
+    label {
+      font-size: 32px;
+    }
+
+    select,
+    input {
+      font-size: 24px;
+    }
+  }
+}
+
+div.calendar {
+  padding: 20px;
+  border: 1px solid red;
+
+  div.headers {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      line-height: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    p.calendar-month-label {
+      font-size: 58px;
+    }
+
+    p.school-name {
+      font-size: 48px;
+    }
+  }
+
+  div.calendar-days {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    p.day-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      background-color: orangered;
+      color: white;
+      border-radius: 5px 50px 5px 50px;
+    }
+
+    div.calendar-day {
+      border: 2px solid orange;
+      border-radius: 10px;
+      height: 100px;
+      position: relative;
+      padding: 2px;
+      display: flex;
+
+      p.day-number {
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+        background-color: green;
+        border-radius: 50%;
+        height: 2rem;
+        width: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      div.day-content {
+        border: none;
+        border-radius: inherit;
+        width: 100%;
+        word-break: break-all;
+        text-align: center;
+
+        p {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

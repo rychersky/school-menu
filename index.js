@@ -1,16 +1,28 @@
 "use strict";
 
-function initDays() {
+function init() {
   let row = 0;
   let day = 2;
 
   for (let i = 0; i < 20; i++) {
     const calendarDay = document.createElement("div");
+    const content = localStorage.getItem(`holcomb-menu-${row}-${day}`)
+      ? localStorage.getItem(`holcomb-menu-${row}-${day}`)
+      : "";
     calendarDay.innerHTML = /* html */ `
-      <p class="day-number" data-day-position="${row}-${day}"></p>
-      <div class="day-content"><p contenteditable></p></div>
+      <p class="day-number"></p>
+      <div class="day-content"><p contenteditable>${content}</p></div>
     `;
+    calendarDay.setAttribute("data-day-position", `${row}-${day}`);
     calendarDay.classList.add("calendar-day");
+    const row2 = row;
+    calendarDay
+      .querySelector("div.day-content p")
+      .addEventListener("focusout", (e) => {
+        console.log(e.target);
+        console.log(`row: ${row2}`);
+        // localStorage.setItem(`holcomb-menu-${row}-${day}`, e.target.value);
+      });
     document.querySelector("div.calendar-days").append(calendarDay);
     day++;
     if (day > 5) {
@@ -18,6 +30,13 @@ function initDays() {
       day = 2;
     }
   }
+
+  document.querySelector("select#month").value = localStorage.getItem("month")
+    ? localStorage.getItem("month")
+    : "0";
+  document.querySelector("input#year").value = localStorage.getItem("year")
+    ? localStorage.getItem("year")
+    : `${new Date().getFullYear()}`;
 }
 
 function isLeapYear(year) {
@@ -54,7 +73,7 @@ function setupCalendar() {
     const date = new Date(year, month, day);
     if ([2, 3, 4, 5].includes(date.getDay())) {
       document.querySelector(
-        `p[data-day-position="${row}-${date.getDay()}"]`
+        `div[data-day-position="${row}-${date.getDay()}"] p`
       ).innerHTML = day;
     }
     if (date.getDay() === 5) {
@@ -63,10 +82,14 @@ function setupCalendar() {
   }
 }
 
-document.querySelector("select#month").addEventListener("input", setupCalendar);
-document
-  .querySelector("input#year")
-  .addEventListener("focusout", setupCalendar);
+document.querySelector("select#month").addEventListener("change", (e) => {
+  localStorage.setItem("holcomb-menu-month", e.target.value);
+  setupCalendar();
+});
+document.querySelector("input#year").addEventListener("change", (e) => {
+  localStorage.setItem("holcomb-menu-year", e.target.value);
+  setupCalendar();
+});
 
-initDays();
+init();
 setupCalendar();
