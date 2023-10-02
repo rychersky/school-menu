@@ -7,7 +7,10 @@ function init() {
   for (let i = 0; i < 20; i++) {
     const calendarDay = document.createElement("div");
     const content = localStorage.getItem(`holcomb-menu-${row}-${day}`)
-      ? localStorage.getItem(`holcomb-menu-${row}-${day}`)
+      ? localStorage
+          .getItem(`holcomb-menu-${row}-${day}`)
+          .replaceAll("<div>", "<br>")
+          .replaceAll("</div>", "")
       : "";
     calendarDay.innerHTML = /* html */ `
       <p class="day-number"></p>
@@ -24,6 +27,8 @@ function init() {
         localStorage.setItem(
           `holcomb-menu-${row2}-${day2}`,
           e.target.innerHTML
+            .replaceAll("<div>", "<br>")
+            .replaceAll("</div>", "")
         );
       });
     document.querySelector("div.calendar-days").append(calendarDay);
