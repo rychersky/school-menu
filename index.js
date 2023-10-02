@@ -15,13 +15,16 @@ function init() {
     `;
     calendarDay.setAttribute("data-day-position", `${row}-${day}`);
     calendarDay.classList.add("calendar-day");
+    // arrow function scope funzies
     const row2 = row;
+    const day2 = day;
     calendarDay
       .querySelector("div.day-content p")
       .addEventListener("focusout", (e) => {
-        console.log(e.target);
-        console.log(`row: ${row2}`);
-        // localStorage.setItem(`holcomb-menu-${row}-${day}`, e.target.value);
+        localStorage.setItem(
+          `holcomb-menu-${row2}-${day2}`,
+          e.target.innerHTML
+        );
       });
     document.querySelector("div.calendar-days").append(calendarDay);
     day++;
@@ -31,11 +34,15 @@ function init() {
     }
   }
 
-  document.querySelector("select#month").value = localStorage.getItem("month")
-    ? localStorage.getItem("month")
+  document.querySelector("select#month").value = localStorage.getItem(
+    "holcomb-menu-month"
+  )
+    ? localStorage.getItem("holcomb-menu-month")
     : "0";
-  document.querySelector("input#year").value = localStorage.getItem("year")
-    ? localStorage.getItem("year")
+  document.querySelector("input#year").value = localStorage.getItem(
+    "holcomb-menu-year"
+  )
+    ? localStorage.getItem("holcomb-menu-year")
     : `${new Date().getFullYear()}`;
 }
 

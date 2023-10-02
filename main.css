@@ -22,6 +22,11 @@ div.month-day-selector {
   justify-content: space-between;
   margin-bottom: 50px;
 }
+@media print {
+  div.month-day-selector {
+    display: none;
+  }
+}
 div.month-day-selector div.md-grouping {
   display: flex;
   flex-direction: column;
