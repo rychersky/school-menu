@@ -13,7 +13,7 @@ div.content-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 800px;
+  width: 1200px;
   padding-top: 10px;
 }
 
@@ -42,7 +42,8 @@ div.month-day-selector div.md-grouping input {
 
 div.calendar {
   padding: 20px;
-  border: 1px solid red;
+  border: 2px solid orangered;
+  border-radius: 10px;
 }
 div.calendar div.headers {
   display: flex;
@@ -104,6 +105,23 @@ div.calendar div.calendar-days div.calendar-day div.day-content {
 }
 div.calendar div.calendar-days div.calendar-day div.day-content p {
   height: 100%;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+div.instructions {
+  margin-top: 32px;
+  margin-bottom: 72px;
+  display: flex;
+  justify-content: center;
+}
+@media print {
+  div.instructions {
+    display: none;
+  }
+}
+div.instructions p {
+  max-width: 600px;
 }
 
 /*# sourceMappingURL=main.css.map */
