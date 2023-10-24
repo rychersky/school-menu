@@ -73,11 +73,13 @@ function setupCalendar() {
     { name: "December", days: 31 },
   ];
 
+  // reset day numbers
   [...document.querySelectorAll("p.day-number")].forEach((node) => {
     node.innerHTML = "";
   });
+  // set calendar month/year label
   document.querySelector(
-    "p.calendar-month-label"
+    "p.calendar-month-year"
   ).innerHTML = `${monthInfo[month].name} ${year}`;
 
   let row = 0;

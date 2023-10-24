@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>Holcomb School Pre-K thru 12 Menu</title>
-    <script src="index.js" defer></script>
+    <!-- <script src="index.js" defer></script> -->
+    <script src="index2.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,8 +15,8 @@
   <body>
     <main>
       <div class="content-wrapper">
-        <div class="month-day-selector">
-          <div class="md-grouping">
+        <div class="config-selectors">
+          <div class="select-grouping">
             <label for="month">Month:</label>
             <select id="month">
               <option value="0">January</option>
@@ -33,16 +34,25 @@
             </select>
           </div>
 
-          <div class="md-grouping">
+          <div class="select-grouping">
+            <label for="meal">Meal:</label>
+            <select id="meal">
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="select-grouping">
             <label for="year">Year:</label>
-            <input id="year" type="tel" maxlength="4" value="2023" />
+            <input id="year" type="tel" maxlength="4" />
           </div>
         </div>
 
         <div class="calendar">
           <div class="headers">
-            <p class="calendar-month-label">March 2023</p>
-            <p class="school-name">Holcomb Lunch Menu</p>
+            <p contenteditable class="calendar-title">Holcomb Lunch Menu</p>
+            <p class="calendar-month-year"></p>
           </div>
 
           <div class="calendar-days">
