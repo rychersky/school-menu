@@ -176,9 +176,9 @@ function updateCalendar() {
   };
 
   // set calendar titles
-  const calendarTitle = storage[year][month][meal]['title'];
-  document.querySelector('p.calendar-title').innerHTML =
-    calendarTitle || `Holcomb ${meal} Menu`;
+  const calendarTitle =
+    storage[year][month][meal]['title'] || `Holcomb ${meal} Menu`;
+  document.querySelector('p.calendar-title').innerHTML = calendarTitle;
   document.querySelector(
     'p.calendar-month-year'
   ).innerHTML = `${month} ${year}`;
@@ -244,22 +244,15 @@ function setupConfigSection() {
 }
 
 function initPage() {
-  const { year } = getConfigValues();
-  if (!getLS()) {
-    let todayYear;
-    if (year) {
-      // if someone has been to the page before and has a value put
-      // into the input field, but has cleared their local storage
-      todayYear = year;
-    } else {
-      todayYear = new Date().getFullYear();
-      document.querySelector('#year').value = todayYear;
-    }
-    setupLocalStorageYear(todayYear, true);
+  const yearSelector = document.querySelector('#year');
+  if (!yearSelector.value) {
+    yearSelector.value = new Date().getFullYear();
   }
-  if (year && !getLS()[year]) {
-    document.querySelector('#year').value = new Date().getFullYear();
-    setupLocalStorageYear(year);
+  if (!getLS()) {
+    setupLocalStorageYear(yearSelector.value, true);
+  }
+  if (!getLS()[yearSelector.value]) {
+    setupLocalStorageYear(yearSelector.value);
   }
   initCalendar();
   updateCalendar();
@@ -267,7 +260,7 @@ function initPage() {
 }
 
 document.querySelector('#year').addEventListener('input', (e) => {
-  if (!/^[1-9][0-9]?[0-9]?[0-9]?$/.test(e.target.value)) {
+  if (!/^[1-9]?[0-9]?[0-9]?[0-9]?$/.test(e.target.value)) {
     e.target.value = '';
     e.target.setCustomValidity('Must be a number');
     e.target.reportValidity();
