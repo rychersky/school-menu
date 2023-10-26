@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 main {
@@ -14,68 +15,128 @@ div.content-wrapper {
   flex-direction: column;
   justify-content: center;
   width: 800px;
-  padding-top: 10px;
 }
 
-div.month-day-selector {
+div.config-selectors {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  gap: 20px;
+  margin-top: 32px;
 }
 @media print {
-  div.month-day-selector {
+  div.config-selectors {
     display: none;
   }
 }
-div.month-day-selector div.md-grouping {
+div.config-selectors div.select-grouping {
   display: flex;
   flex-direction: column;
-  width: 49%;
+  width: 100%;
 }
-div.month-day-selector div.md-grouping label {
+div.config-selectors div.select-grouping label {
   font-size: 32px;
 }
-div.month-day-selector div.md-grouping select,
-div.month-day-selector div.md-grouping input {
+
+div.print-buttons {
+  height: 48px;
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  letter-spacing: 1px;
+}
+div.print-buttons button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(45, 45, 45);
+  color: white;
   font-size: 24px;
+}
+div.print-buttons button:hover {
+  cursor: pointer;
+  background-color: black;
+}
+div.print-buttons a {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: black;
+}
+div.print-buttons a:hover {
+  background-color: rgb(237, 237, 237);
+}
+@media print {
+  div.print-buttons {
+    display: none;
+  }
 }
 
 div.calendar {
+  margin-top: 32px;
   padding: 20px;
-  border: 1px solid red;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 div.calendar div.headers {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas: ". title date";
+  height: 56px;
+  align-items: baseline;
+  padding-top: 16px;
 }
 div.calendar div.headers p {
   line-height: 1;
   display: flex;
-  align-items: flex-end;
 }
-div.calendar div.headers p.calendar-month-label {
-  font-size: 58px;
+div.calendar div.headers p.calendar-title {
+  grid-area: title;
+  font-size: 36px;
+  justify-content: center;
 }
-div.calendar div.headers p.school-name {
-  font-size: 48px;
+div.calendar div.headers p.calendar-month-year {
+  grid-area: date;
+  font-size: 18px;
+  justify-content: flex-end;
 }
 div.calendar div.calendar-days {
   margin-top: 20px;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+div.calendar div.calendar-days::before {
+  content: "";
+  background-image: url("./hornets.jpg");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.06;
 }
 div.calendar div.calendar-days p.day-header {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
-  background-color: orangered;
+  background-color: black;
   color: white;
   border-radius: 5px 50px 5px 50px;
 }
 div.calendar div.calendar-days div.calendar-day {
-  border: 2px solid orange;
+  border: 2px solid black;
   border-radius: 10px;
   height: 100px;
   position: relative;
@@ -86,7 +147,7 @@ div.calendar div.calendar-days div.calendar-day p.day-number {
   position: absolute;
   top: -1rem;
   right: -1rem;
-  background-color: green;
+  background-color: black;
   border-radius: 50%;
   height: 2rem;
   width: 2rem;
@@ -104,6 +165,25 @@ div.calendar div.calendar-days div.calendar-day div.day-content {
 }
 div.calendar div.calendar-days div.calendar-day div.day-content p {
   height: 100%;
+  font-size: 12px;
+  line-height: 1.25;
+  overflow: auto;
+}
+
+div.blurb {
+  margin: 32px 0;
+  width: 100%;
+  height: 136px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+div.blurb p {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 /*# sourceMappingURL=main.css.map */
