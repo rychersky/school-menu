@@ -3,7 +3,7 @@
   <head>
     <title>Holcomb School Pre-K thru 12 Menu</title>
     <!-- <script src="index.js" defer></script> -->
-    <script src="index2.js" defer></script>
+    <script src="index.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,41 +17,41 @@
       <div class="content-wrapper">
         <div class="config-selectors">
           <div class="select-grouping">
-            <label for="month">Month:</label>
+            <label for="year">Year</label>
+            <input id="year" type="tel" maxlength="4" />
+          </div>
+
+          <div class="select-grouping">
+            <label for="month">Month</label>
             <select id="month">
-              <option value="0">January</option>
-              <option value="1">Febuary</option>
-              <option value="2">March</option>
-              <option value="3">April</option>
-              <option value="4">May</option>
-              <option value="5">June</option>
-              <option value="6">July</option>
-              <option value="7">August</option>
-              <option value="8">September</option>
-              <option value="9">October</option>
-              <option value="10">November</option>
-              <option value="11">December</option>
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
             </select>
           </div>
 
           <div class="select-grouping">
-            <label for="meal">Meal:</label>
+            <label for="meal">Meal</label>
             <select id="meal">
-              <option value="breakfast">Breakfast</option>
-              <option value="lunch">Lunch</option>
-              <option value="other">Other</option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Other">Other</option>
             </select>
-          </div>
-
-          <div class="select-grouping">
-            <label for="year">Year:</label>
-            <input id="year" type="tel" maxlength="4" value="2023"/>
           </div>
         </div>
 
         <div class="calendar">
           <div class="headers">
-            <p contenteditable class="calendar-title">Holcomb Lunch Menu</p>
+            <p contenteditable="" class="calendar-title">Holcomb Lunch Menu</p>
             <p class="calendar-month-year"></p>
           </div>
 

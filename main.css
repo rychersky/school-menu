@@ -36,10 +36,6 @@ div.config-selectors div.select-grouping {
 div.config-selectors div.select-grouping label {
   font-size: 32px;
 }
-div.config-selectors div.select-grouping select,
-div.config-selectors div.select-grouping input {
-  font-size: 24px;
-}
 
 div.calendar {
   padding: 20px;
