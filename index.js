@@ -8,20 +8,6 @@ function setLS(object) {
   localStorage.setItem('holcomb-menu', JSON.stringify(object));
 }
 
-function createDayKeys() {
-  // prettier-ignore
-  const dayKeys = [
-    '0-2', '0-3', '0-4', '0-5',
-    '1-2', '1-3', '1-4', '1-5',
-    '2-2', '2-3', '2-4', '2-5',
-    '3-2', '3-3', '3-4', '3-5',
-    '4-2', '4-3', '4-4', '4-5',
-  ];
-  const days = {};
-  dayKeys.forEach((k) => (days[k] = ''));
-  return days;
-}
-
 function isLeapYear(year) {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
@@ -32,6 +18,20 @@ function getConfigValues() {
     month: document.querySelector('select#month').value,
     meal: document.querySelector('select#meal').value,
   };
+}
+
+function createDayKeys() {
+  // prettier-ignore
+  const dayKeys = [
+    '0-2', '0-3', '0-4', '0-5',
+    '1-2', '1-3', '1-4', '1-5',
+    '2-2', '2-3', '2-4', '2-5',
+    '3-2', '3-3', '3-4', '3-5',
+    '4-2', '4-3', '4-4', '4-5',
+  ];
+  const newObj = { days: {}, title: '', blurb: '' };
+  dayKeys.forEach((k) => (newObj['days'][k] = ''));
+  return newObj;
 }
 
 function setupLocalStorageYear(year, isInitial = false) {
@@ -58,13 +58,34 @@ function setupLocalStorageYear(year, isInitial = false) {
       [year]: obj,
     });
   } else {
-    const storage = getls();
+    const storage = getLS();
     storage[year] = obj;
     setLS(storage);
   }
 }
 
 function initCalendar() {
+  // setup title data handling
+  const calendarTitle = document.querySelector('p.calendar-title');
+  calendarTitle.addEventListener('focusout', (e) => {
+    const storage = getLS();
+    const { year, month, meal } = getConfigValues();
+    storage[year][month][meal]['title'] = e.target.textContent;
+    setLS(storage);
+  });
+
+  // setup blurb data handling
+  const blurb = document.querySelector('div.blurb p');
+  blurb.addEventListener('focusout', (e) => {
+    const storage = getLS();
+    const { year, month, meal } = getConfigValues();
+    storage[year][month][meal]['blurb'] = e.target.innerHTML
+      .replaceAll('<div>', '<br>')
+      .replaceAll('</div>', '');
+    setLS(storage);
+  });
+
+  // create calendar days and setup data handling
   let row = 0;
   let day = 2;
 
@@ -88,7 +109,7 @@ function initCalendar() {
         const text = e.target.innerHTML
           .replaceAll('<div>', '<br>')
           .replaceAll('</div>', '');
-        storage[year][month][meal][position] = text;
+        storage[year][month][meal]['days'][position] = text;
         setLS(storage);
       });
     document.querySelector('div.calendar-days').append(calendarDay);
@@ -101,6 +122,7 @@ function initCalendar() {
 }
 
 function updateCalendar() {
+  const storage = getLS();
   const { year, month, meal } = getConfigValues();
   const monthDays = {
     January: {
@@ -154,10 +176,16 @@ function updateCalendar() {
   };
 
   // set calendar titles
-  document.querySelector('p.calendar-title').innerHTML = `Holcomb ${meal} Menu`;
+  const calendarTitle = storage[year][month][meal]['title'];
+  document.querySelector('p.calendar-title').innerHTML =
+    calendarTitle || `Holcomb ${meal} Menu`;
   document.querySelector(
     'p.calendar-month-year'
   ).innerHTML = `${month} ${year}`;
+
+  // set blurb
+  const blurb = document.querySelector('div.blurb p');
+  blurb.innerHTML = storage[year][month][meal]['blurb'];
 
   // reset day numbers
   [...document.querySelectorAll('p.day-number')].forEach((node) => {
@@ -180,9 +208,8 @@ function updateCalendar() {
 
   // fetch calendar content
   [...document.querySelectorAll('div.calendar-day')].forEach((node) => {
-    const storage = getLS();
     const position = node.getAttribute('data-day-position');
-    const content = storage[year][month][meal][position];
+    const content = storage[year][month][meal]['days'][position];
     node.querySelector('div.day-content p').innerHTML = content;
   });
 }
@@ -196,7 +223,10 @@ function setupConfigSection() {
     const storage = getLS();
     storage.selectedYear = e.target.value;
     setLS(storage);
-    setupLocalStorageYear(e.target.value);
+    const { year } = getConfigValues();
+    if (!storage[year]) {
+      setupLocalStorageYear(e.target.value);
+    }
     updateCalendar();
   });
   monthSelector.addEventListener('change', (e) => {
@@ -214,18 +244,22 @@ function setupConfigSection() {
 }
 
 function initPage() {
+  const { year } = getConfigValues();
   if (!getLS()) {
     let todayYear;
-    const yearSelector = document.querySelector('#year');
-    if (yearSelector.value) {
+    if (year) {
       // if someone has been to the page before and has a value put
       // into the input field, but has cleared their local storage
-      todayYear = yearSelector.value;
+      todayYear = year;
     } else {
       todayYear = new Date().getFullYear();
-      yearSelector.value = todayYear;
+      document.querySelector('#year').value = todayYear;
     }
     setupLocalStorageYear(todayYear, true);
+  }
+  if (year && !getLS()[year]) {
+    document.querySelector('#year').value = new Date().getFullYear();
+    setupLocalStorageYear(year);
   }
   initCalendar();
   updateCalendar();
