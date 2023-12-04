@@ -105,7 +105,7 @@ div.calendar div.headers p.calendar-title {
 }
 div.calendar div.headers p.calendar-month-year {
   grid-area: date;
-  font-size: 24px;
+  font-size: 18px;
   justify-content: flex-end;
 }
 div.calendar div.calendar-days {
@@ -148,17 +148,17 @@ div.calendar div.calendar-days div.calendar-day {
 }
 div.calendar div.calendar-days div.calendar-day p.day-number {
   position: absolute;
-  top: -1rem;
-  right: -1rem;
+  top: -12px;
+  right: -12px;
   background-color: black;
   border-radius: 50%;
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 1.5rem;
+  width: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
 }
 div.calendar div.calendar-days div.calendar-day div.day-content {
   border: none;
